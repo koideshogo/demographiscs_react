@@ -4,7 +4,7 @@ import {PrefectureCheckBoxProps} from "../_types/prefectures";
 import {Prefecture} from "../_types/api/prefectures";
 
 export const usePrefectureCheckBox = (
-    updateDemographicsData: (prefCode: string, prefName: string) => Promise<void>,
+    updatePopulationData: (checkedPrefecture: []) => Promise<void>,
 ) => {
     const [prefectureCheckBoxInfo, setPrefectureCheckBoxInfo] = useState<PrefectureCheckBoxProps>([{
         id: "",
@@ -24,9 +24,10 @@ export const usePrefectureCheckBox = (
                 prefecture.id === id ? { ...prefecture, checked: checked } : prefecture
             )
         );
-        if (checked) {
-            await updateDemographicsData(id.toString(), name);
-        }
+        console.log(prefectureCheckBoxInfo)
+        // checked だけを取得
+        // const checkedPrefecture = prefectureCheckBoxInfo.filter((prefecture) => prefecture.checked);
+        // console.log(checkedPrefecture)
     };
 
     useEffect(() => {

@@ -3,7 +3,7 @@
  */
 import React from "react";
 
-// export type PrefectureDemographicsViewModel = {
+// export type PrefecturePopulationViewModel = {
 //     prefectureCheckBoxInfo: {
 //         id: string,
 //         name: string,
@@ -11,7 +11,7 @@ import React from "react";
 //         label: string,
 //         handleChange: (id: string) => (event: React.ChangeEvent<HTMLInputElement>) => void;
 //     }[],
-//     demographicsGraphs: {
+//     populationGraphs: {
 //         activeTab: "Elderly"|"WorkingAge"|"Young"|"Total";
 //         data: {
 //             label: string;

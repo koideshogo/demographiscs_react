@@ -6,7 +6,7 @@ type Props = {
     populationList: populationListType
 }
 
-const DemographicsGraphs: React.FC<Props> = ({ populationList }) => {
+const PopulationGraph: React.FC<Props> = ({ populationList }) => {
 
     return (
         <HighchartsReact
@@ -17,4 +17,4 @@ const DemographicsGraphs: React.FC<Props> = ({ populationList }) => {
     )
 }
 
-export default DemographicsGraphs;
+export default PopulationGraph;

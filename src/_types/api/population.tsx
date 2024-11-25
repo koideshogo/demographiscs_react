@@ -1,17 +1,17 @@
 /**
  * @endpoint GET /population/composition/perYear
  */
-export type DemographicsResponse = {
+export type PopulationResponse = {
     message: string | null;
-    result: DemographicsResult;
+    result: PopulationResult;
 }
 
-export type DemographicsResult = {
+export type PopulationResult = {
     boundaryYear: number;
-    data: DemographicsData[];
+    data: PopulationData[];
 }
 
-export type DemographicsData = {
+export type PopulationData = {
     label: string;
     data: YearlyData[];
 }
