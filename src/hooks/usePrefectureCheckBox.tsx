@@ -2,6 +2,7 @@ import {ChangeEvent, useEffect, useState} from "react";
 import {getPrefectures} from "../api/prefectures";
 import {PrefectureCheckBoxProps} from "../_types/prefectures";
 import {Prefecture} from "../_types/api/prefectures";
+import {createLogger} from "vite";
 
 export const usePrefectureCheckBox = (
     updatePopulationData: (checkedPrefecture: []) => Promise<void>,
@@ -19,15 +20,15 @@ export const usePrefectureCheckBox = (
 
     const handleCheckboxChange = async (event: ChangeEvent<HTMLInputElement>) => {
         const { id, name, checked } = event.target;
-        setPrefectureCheckBoxInfo((prev) =>
-            prev.map((prefecture) =>
-                prefecture.id === id ? { ...prefecture, checked: checked } : prefecture
-            )
-        );
-        console.log(prefectureCheckBoxInfo)
-        // checked だけを取得
-        // const checkedPrefecture = prefectureCheckBoxInfo.filter((prefecture) => prefecture.checked);
-        // console.log(checkedPrefecture)
+        setPrefectureCheckBoxInfo((prev) => {
+            const updatedInfo = prev.map((prefecture) =>
+                prefecture.id === id ? { ...prefecture, checked } : prefecture
+            );
+            const checkedPrefecture = updatedInfo.filter((prefecture) => prefecture.checked);
+            updatePopulationData(checkedPrefecture);
+
+            return updatedInfo;
+        });
     };
 
     useEffect(() => {

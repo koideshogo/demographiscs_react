@@ -1,6 +1,5 @@
-import {useCallback, useEffect, useMemo, useState} from "react";
+import {useCallback, useState} from "react";
 import {getPopulation} from "../api/population";
-
 
 const usePopulation = (
     populationType: string
@@ -13,23 +12,20 @@ const usePopulation = (
         elderly: [],
     });
 
-    // populationTypeに変更があった場合にデータを更新する
-    // useEffect(() => {
-    //     // 非同期で即時関数を実行する
-    //     (async () => {
-    //         // const checkedPopulationData = await getPopulation(prefCode);
-    //         // console.log(populationType)
-    //     })();
-    //
-    // }, [populationType]);
-
-    const updatePopulationData = useCallback(async (checkedPopulationData: []) => {
-        // const checkedPopulationData = await getPopulation(prefCode);
-        console.log(checkedPopulationData)
-        // const prefecturePopulations = useMemo(() => checkedPopulationData.flatMap((result) => reslut.data || []), [checkedPopulationData]);
-        // console.log(prefCode)
+    const [checkedPrefectures, setCheckedPrefecture] = useState([]);
+    const updatePopulationData = useCallback(async (checkPrefectures: []) => {
+        setCheckedPrefecture(checkPrefectures);
     }, []);
 
+    const fetchAllPopulationData = async () => {
+        try {
+            return await Promise.all(checkedPrefectures.map((prefecture) => getPopulation(prefecture.id)));
+        } catch (error) {
+            console.error('Error fetching population data:', error);
+        }
+    };
+    // データ取得
+    const data = fetchAllPopulationData();
 
     return { populationData, updatePopulationData };
 }
