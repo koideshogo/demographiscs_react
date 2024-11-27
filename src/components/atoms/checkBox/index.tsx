@@ -1,14 +1,7 @@
 import React from "react";
+import {PrefectureCheckBox} from "../../../_types/prefectures";
 
-interface CheckBoxProps {
-    id: string;
-    name: string;
-    checked: boolean;
-    label: string;
-    handleChange: () => (event: React.ChangeEvent<HTMLInputElement>) => void;
-}
-
-const Index = ({id, name, checked, handleChange}: CheckBoxProps) => {
+const Index = ({ id, name, checked, handleChange }: PrefectureCheckBox) => {
     return (
         <input
             type="checkbox"

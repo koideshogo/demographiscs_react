@@ -21,5 +21,5 @@ export type PopulationData = {
 export type YearlyData = {
     year: number;
     value: number;
-    rate: number;
+    // rate: number;
 }

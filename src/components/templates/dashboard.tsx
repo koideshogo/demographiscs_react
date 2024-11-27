@@ -6,8 +6,12 @@ import SelectBox from "../atoms/selectBox";
 import useSelectTypePopulation from "../../hooks/useSelectTypePopulation";
 
 export const Dashboard = () => {
+    // セレクトボックスのpropsを取得
     const selectBoxProps = useSelectTypePopulation();
+    // 人口データを取得
     const { populationData, updatePopulationData } = usePopulation(selectBoxProps.selectedValue);
+    // 都道府県のチェックボックスを取得
+    // @ts-ignore
     const { prefectureCheckBoxInfo, isLoading } = usePrefectureCheckBox(updatePopulationData);
     if (isLoading) {
         return <p>Loading data, please wait...</p>;
@@ -20,15 +24,16 @@ export const Dashboard = () => {
                     <h1 className="text-3xl font-bold text-white-800 text-center">人口統計グラフ</h1>
 
                     <div className="flex justify-center">
-                        <SelectBox props={selectBoxProps} />
+                        <SelectBox options={selectBoxProps.options} handleChange={selectBoxProps.handleChange} selectedValue={selectBoxProps.selectedValue} />
                     </div>
 
                     <div className="flex justify-center">
+                        {/*// @ts-ignore*/}
                         <PrefectureCheckBox prefectureCheckBoxInfo={prefectureCheckBoxInfo} />
                     </div>
 
                     <div className="flex justify-center">
-                        <PopulationGraph populationList={populationData} selectedGraphType />
+                        <PopulationGraph populationList={populationData} />
                     </div>
                 </div>
             </div>

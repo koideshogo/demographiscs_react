@@ -1,8 +1,10 @@
 import CheckBox from "../atoms/checkBox";
 import Label from "../atoms/label";
 import React from "react";
+import {PrefectureCheckBoxProps} from "../../_types/prefectures";
 
-const PrefectureCheckBox: React.FC<Props> = ({ prefectureCheckBoxInfo }) => {
+const PrefectureCheckBox: React.FC<PrefectureCheckBoxProps> = ({ prefectureCheckBoxInfo }) => {
+    console.log(prefectureCheckBoxInfo);
     return (
         <>
             <div className="bg-black-50 flex justify-center items-center p-4">
@@ -14,7 +16,7 @@ const PrefectureCheckBox: React.FC<Props> = ({ prefectureCheckBoxInfo }) => {
                                 className="flex items-center justify-between p-4 border border-gray-300 rounded-lg"
                             >
                                 <Label htmlFor={info.id} label={info.label} />
-                                <CheckBox {...info} />
+                                <CheckBox {...info}/>
                             </div>
                         ))}
                     </div>

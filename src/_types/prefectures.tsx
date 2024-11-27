@@ -20,10 +20,14 @@ import React from "react";
 //     }
 // }
 
+export type PrefectureCheckBox = {
+    id: string,
+    name: string,
+    checked: boolean,
+    label: string,
+    handleChange: (event: React.ChangeEvent<HTMLInputElement>) => void,
+};
+
 export type PrefectureCheckBoxProps = {
-    id: string;
-    name: string;
-    checked: boolean;
-    label: string;
-    handleChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
-}[];
+    prefectureCheckBoxInfo: PrefectureCheckBox[];
+};

@@ -1,15 +1,11 @@
 import React from "react";
+import {SelectTypePopulationProps} from "../../../_types/population";
 
-interface SelectBoxProps {
-    options: { value: number, label: string }[];
-    handleChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
-}
-
-const SelectBox = ({props} : SelectBoxProps) => {
+const SelectBox = ({options, handleChange, selectedValue} : SelectTypePopulationProps) => {
     return (
         <div>
-            <select onChange={props.handleChange} value={props.value}>
-                {props.options.map((option) => (
+            <select onChange={handleChange}>
+                {options.map((option) => (
                     <option key={option.value} value={option.value}>
                         {option.label}
                     </option>

@@ -2,29 +2,29 @@ import {ChangeEvent, useEffect, useState} from "react";
 import {getPrefectures} from "../api/prefectures";
 import {PrefectureCheckBoxProps} from "../_types/prefectures";
 import {Prefecture} from "../_types/api/prefectures";
-import {createLogger} from "vite";
 
 export const usePrefectureCheckBox = (
-    updatePopulationData: (checkedPrefecture: []) => Promise<void>,
+    updatePopulationData: (checkedPrefecture: {
+        handleChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+        name: string;
+        checked: boolean;
+        id: string;
+        label: string
+    }[]) => Promise<PrefectureCheckBoxProps>,
 ) => {
-    const [prefectureCheckBoxInfo, setPrefectureCheckBoxInfo] = useState<PrefectureCheckBoxProps>([{
-        id: "",
-        name: "",
-        checked: false,
-        label: "",
-        handleChange: () => () => {},
-    }]);
+    const [prefectureCheckBoxInfo, setPrefectureCheckBoxInfo] = useState<PrefectureCheckBoxProps>();
 
     // ローディング状態
     const [isLoading, setLoading] = useState<boolean>(true);
 
     const handleCheckboxChange = async (event: ChangeEvent<HTMLInputElement>) => {
-        const { id, name, checked } = event.target;
+        const { id, checked } = event.target;
         setPrefectureCheckBoxInfo((prev) => {
-            const updatedInfo = prev.map((prefecture) =>
+            // @ts-ignore
+            const updatedInfo = prev.map((prefecture: { id: string; }) =>
                 prefecture.id === id ? { ...prefecture, checked } : prefecture
             );
-            const checkedPrefecture = updatedInfo.filter((prefecture) => prefecture.checked);
+            const checkedPrefecture = updatedInfo.filter((prefecture: { checked: boolean; }) => prefecture.checked);
             updatePopulationData(checkedPrefecture);
 
             return updatedInfo;
@@ -36,7 +36,14 @@ export const usePrefectureCheckBox = (
         const fetchPrefecturesData = async () => {
             try {
                 const prefectureData = await getPrefectures();
-                const checkBoxesWithHandlers: PrefectureCheckBoxProps = prefectureData.result.map((info: Prefecture) => {
+
+                const checkBoxWithHandlers: {
+                    handleChange: (event: React.ChangeEvent<HTMLInputElement>) => Promise<void>;
+                    name: string;
+                    checked: boolean;
+                    id: string;
+                    label: string
+                }[] = prefectureData.result.map((info: Prefecture) => {
                     return {
                         id: info.prefCode.toString(),
                         name: info.prefName,
@@ -45,7 +52,8 @@ export const usePrefectureCheckBox = (
                         handleChange: handleCheckboxChange,
                     };
                 });
-                setPrefectureCheckBoxInfo(checkBoxesWithHandlers);
+                // @ts-ignore
+                setPrefectureCheckBoxInfo(checkBoxWithHandlers);
             } catch (error) {
                 console.error('Failed to fetch prefecture data:', error);
             } finally {
