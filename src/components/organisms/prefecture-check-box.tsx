@@ -4,7 +4,6 @@ import React from "react";
 import {PrefectureCheckBoxProps} from "../../_types/prefectures";
 
 const PrefectureCheckBox: React.FC<PrefectureCheckBoxProps> = ({ prefectureCheckBoxInfo }) => {
-    console.log(prefectureCheckBoxInfo);
     return (
         <>
             <div className="bg-black-50 flex justify-center items-center p-4">
