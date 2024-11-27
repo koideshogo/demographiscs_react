@@ -8,10 +8,7 @@ const usePopulation = (
         boundaryYear: 0,
         prefectureCode: 0,
         prefectureName: '',
-        total: {label: '', data: [{'year' : 0, 'value': 0, 'rate': 0}]},
-        young: {label: '', data: [{'year' : 0, 'value': 0, 'rate': 0}]},
-        workingAge: {label: '', data: [{'year' : 0, 'value': 0, 'rate': 0}]},
-        elderly: {label: '', data: [{'year' : 0, 'value': 0, 'rate': 0}]},
+        result: [],
     });
     const [checkedPrefectures, setCheckedPrefecture] = useState([]);
     const updatePopulationData = useCallback(async (checkPrefectures: []) => {
@@ -29,15 +26,12 @@ const usePopulation = (
     useEffect(() => {
         fetchAllPopulationData().then((data) => {
             const populationByGraph = data.map((population) => {
-                const populationResultData = population.result.data;
+                const populationResultData = population.result.data[SelectedGraphType];
                 return {
                     prefectureName: population.prefectureName,
                     prefectureCode: population.prefectureCode,
                     boundaryYear: population.result.boundaryYear,
-                    total: populationResultData[0],
-                    young: populationResultData[1],
-                    workingAge: populationResultData[2],
-                    elderly: populationResultData[3],
+                    result: populationResultData,
                 };
             });
 
