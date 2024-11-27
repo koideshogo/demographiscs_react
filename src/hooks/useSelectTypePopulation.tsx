@@ -23,7 +23,7 @@ const useSelectTypePopulation = (): SelectTypePopulationProps => {
     return {
         handleChange: changePopulationType,
         options: GRAPH_TYPES,
-        checkedValue: graphType
+        selectedValue: graphType
     }
 }
 
