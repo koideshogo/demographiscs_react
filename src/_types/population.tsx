@@ -1,7 +1,8 @@
-import {ChangeEvent} from "react";
+import { ChangeEvent } from "react";
 
 export type SelectTypePopulationProps = {
-    handleChange: (event: ChangeEvent<HTMLSelectElement>) => void;
-    options: { value: number, label: string }[];
-    selectedValue: number;
+  handleChangeNext: (graphType: 0 | 1 | 2 | 3) => void;
+  handleChange: (event: ChangeEvent<HTMLSelectElement>) => void;
+  options: { value: number; label: string }[];
+  selectedValue: number;
 };
