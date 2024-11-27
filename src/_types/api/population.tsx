@@ -2,6 +2,8 @@
  * @endpoint GET /population/composition/perYear
  */
 export type PopulationResponse = {
+    prefectureCode: string;
+    prefectureName: string;
     message: string | null;
     result: PopulationResult;
 }
@@ -19,4 +21,5 @@ export type PopulationData = {
 export type YearlyData = {
     year: number;
     value: number;
+    rate: number;
 }
