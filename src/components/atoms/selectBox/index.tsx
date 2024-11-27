@@ -1,8 +1,7 @@
 import React from "react";
 
 interface SelectBoxProps {
-    value: string;
-    options: string[];
+    options: { value: number, label: string }[];
     handleChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
 }
 
@@ -11,8 +10,8 @@ const SelectBox = ({props} : SelectBoxProps) => {
         <div>
             <select onChange={props.handleChange} value={props.value}>
                 {props.options.map((option) => (
-                    <option key={option} value={option}>
-                        {option}
+                    <option key={option.value} value={option.value}>
+                        {option.label}
                     </option>
                 ))}
             </select>
